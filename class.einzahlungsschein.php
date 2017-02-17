@@ -12,22 +12,22 @@
 class Einzahlungsschein {
 
 	//values on payment slip
-	private $ezs_bankName = '';
-	private $ezs_bankCity = '';
-	private $ezs_bankingAccount = '';
+	public $ezs_bankName = '';
+	public $ezs_bankCity = '';
+	public $ezs_bankingAccount = '';
 	
-	private $ezs_recipientName    = '';
-	private $ezs_recipientAddress = '';
-	private $ezs_recipientCity    = '';
-	private $ezs_bankingCustomerIdentification = '';
+	public $ezs_recipientName    = '';
+	public $ezs_recipientAddress = '';
+	public $ezs_recipientCity    = '';
+	public $ezs_bankingCustomerIdentification = '';
 	
-	private $ezs_payerLine1		  = '';
-	private $ezs_payerLine2       = '';
-	private $ezs_payerLine3       = '';
-	private $ezs_payerLine4       = '';
+	public $ezs_payerLine1		  = '';
+	public $ezs_payerLine2       = '';
+	public $ezs_payerLine3       = '';
+	public $ezs_payerLine4       = '';
 	
-	private $ezs_referenceNumber = '';
-	private $ezs_amount = 0;
+	public $ezs_referenceNumber = '';
+	public $ezs_amount = 0;
 
     public function __construct(){}
 
@@ -90,8 +90,6 @@ class Einzahlungsschein {
         $this->ezs_referenceNumber = $referenceNumber;
         return true;
     }
-
-
 
 
     /**
