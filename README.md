@@ -1,1 +1,1 @@
-**THIS LIBRARY IS NO LONGER MAINTAINED!**<br>Better have a look at <https://github.com/ravage84/SwissPaymentSlip/>
+#class.einzahlungsschein.phpA fork of Sprain's class to create ESR-Paperslips.The idea of this fork is to have a simple way to create reference numbers and access them in PHP#USAGEsee example_orange.phpMore about the original Project: http://sprain.ch/blog/downloads/class-esr-besr-einzahlungsschein-php/
