@@ -168,4 +168,40 @@ class Einzahlungsschein {
         return $completeReferenceNumber;
     }
 
+    /**
+    * Displays a string in blocks of a certain size.
+    * Example: 00000000000000000000 becomes more readable 00000 00000 00000
+    * @param string $string
+    * @param int $blocksize
+    * @return string
+    */
+    private function breakStringIntoBlocks($string, $blocksize=5, $alignFromRight=true) {
+        
+        //lets reverse the string (because we want the block to be aligned from the right)
+        if($alignFromRight){
+            $string = strrev($string);
+        }//if
+        
+        //chop it into blocks
+        $string = trim(chunk_split($string, $blocksize, ' '));
+        
+        //re-reverse
+        if($alignFromRight){
+            $string = strrev($string);
+        }//if
+        
+        return $string;
+        
+    }
+    
+    
+    
+    /**
+    * Formats IBAN number in human readable format
+    * @return string
+    */
+    private function formatIban($iban){
+        return $this->breakStringIntoBlocks($iban, 4, false);
+    }
+
 }
