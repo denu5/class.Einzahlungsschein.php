@@ -11,23 +11,23 @@
 
 class Einzahlungsschein {
 
-	//values on payment slip
-	public $ezs_bankName = '';
-	public $ezs_bankCity = '';
-	public $ezs_bankingAccount = '';
-	
-	public $ezs_recipientName    = '';
-	public $ezs_recipientAddress = '';
-	public $ezs_recipientCity    = '';
-	public $ezs_bankingCustomerIdentification = '';
-	
-	public $ezs_payerLine1		  = '';
-	public $ezs_payerLine2       = '';
-	public $ezs_payerLine3       = '';
-	public $ezs_payerLine4       = '';
-	
-	public $ezs_referenceNumber = '';
-	public $ezs_amount = 0;
+    //values on payment slip
+    public $ezs_bankName = '';
+    public $ezs_bankCity = '';
+    public $ezs_bankingAccount = '';
+
+    public $ezs_recipientName    = '';
+    public $ezs_recipientAddress = '';
+    public $ezs_recipientCity    = '';
+    public $ezs_bankingCustomerIdentification = '';
+
+    public $ezs_payerLine1        = '';
+    public $ezs_payerLine2       = '';
+    public $ezs_payerLine3       = '';
+    public $ezs_payerLine4       = '';
+
+    public $ezs_referenceNumber = '';
+    public $ezs_amount = 0;
 
     public function __construct(){}
 
@@ -46,13 +46,13 @@ class Einzahlungsschein {
     }
 
     /**
-    * Set name and address of recipient of money (= you, I guess)
-    * @param string $recipientName
-    * @param string $recipientAddress
-    * @param string $recipientCity
-    * @param int    $bankingCustomerIdentification
-    * @return bool
-    */
+     * Set name and address of recipient of money (= you, I guess)
+     * @param string $recipientName
+     * @param string $recipientAddress
+     * @param string $recipientCity
+     * @param int    $bankingCustomerIdentification
+     * @return bool
+     */
     public function setRecipientData($recipientName, $recipientAddress, $recipientCity, $bankingCustomerIdentification){
         $this->ezs_recipientName    = $recipientName;
         $this->ezs_recipientAddress = $recipientAddress;
@@ -63,13 +63,13 @@ class Einzahlungsschein {
 
 
     /**
-    * Set name and address of payer (very flexible four lines of text)
-    * @param string $payerLine1
-    * @param string $payerLine2
-    * @param string $payerLine3
-    * @param string $payerLine4
-    * @return bool
-    */
+     * Set name and address of payer (very flexible four lines of text)
+     * @param string $payerLine1
+     * @param string $payerLine2
+     * @param string $payerLine3
+     * @param string $payerLine4
+     * @return bool
+     */
     public function setPayerData($payerLine1, $payerLine2, $payerLine3='', $payerLine4=''){
         $this->ezs_payerLine1 = $payerLine1;
         $this->ezs_payerLine2 = $payerLine2;
@@ -86,7 +86,7 @@ class Einzahlungsschein {
      * @return bool
      */
     public function setPaymentData($amount, $referenceNumber=null){
-        $this->ezs_amount 		   = sprintf("%01.2f",$amount);
+        $this->ezs_amount          = sprintf("%01.2f",$amount);
         $this->ezs_referenceNumber = $referenceNumber;
         return true;
     }
@@ -130,14 +130,14 @@ class Einzahlungsschein {
     }//function
 
     /**
-    * Creates Modulo10 recursive check digit
-    *
-    * as found on http://www.developers-guide.net/forums/5431,modulo10-rekursiv
-    * (thanks, dude!)
-    *
-    * @param string $number
-    * @return int
-    */
+     * Creates Modulo10 recursive check digit
+     *
+     * as found on http://www.developers-guide.net/forums/5431,modulo10-rekursiv
+     * (thanks, dude!)
+     *
+     * @param string $number
+     * @return int
+     */
     private function modulo10($number) {
         $table = array(0,9,4,6,8,2,7,1,3,5);
         $next = 0;
@@ -150,9 +150,9 @@ class Einzahlungsschein {
 
 
     /**
-    * Creates complete reference number
-    * @return string
-    */
+     * Creates complete reference number
+     * @return string
+     */
     public function createCompleteReferenceNumber() {
 
         //get reference number and fill with zeros
@@ -169,39 +169,33 @@ class Einzahlungsschein {
     }
 
     /**
-    * Displays a string in blocks of a certain size.
-    * Example: 00000000000000000000 becomes more readable 00000 00000 00000
-    * @param string $string
-    * @param int $blocksize
-    * @return string
-    */
+     * Displays a string in blocks of a certain size.
+     * Example: 00000000000000000000 becomes more readable 00000 00000 00000
+     * @param string $string
+     * @param int $blocksize
+     * @return string
+     */
     private function breakStringIntoBlocks($string, $blocksize=5, $alignFromRight=true) {
-        
+
         //lets reverse the string (because we want the block to be aligned from the right)
         if($alignFromRight){
             $string = strrev($string);
         }//if
-        
+
         //chop it into blocks
         $string = trim(chunk_split($string, $blocksize, ' '));
-        
+
         //re-reverse
         if($alignFromRight){
             $string = strrev($string);
         }//if
-        
+
         return $string;
-        
+
     }
-    
-    
-    
-    /**
-    * Formats IBAN number in human readable format
-    * @return string
-    */
-    private function formatIban($iban){
-        return $this->breakStringIntoBlocks($iban, 4, false);
+
+    public function getFormattedReferenceNr(){
+        return $this->breakStringIntoBlocks($this->createCompleteReferenceNumber(),5,true);
     }
 
 }
